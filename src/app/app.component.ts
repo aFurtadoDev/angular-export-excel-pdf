@@ -120,45 +120,45 @@ export class AppComponent {
 
   table(data, columns) {
     return {
-      style:'sectionBody',
+      style: 'sectionBody',
       table: {
         headerRows: 1,
         body: this.buildTableBody(data, columns),
       },
-      layout:  {
-        fillColor: function(rowIndex, node, columnIndex) {
+      layout: {
+        fillColor: function (rowIndex, node, columnIndex) {
           // You can change condition according to your requirements
-          return  columnIndex=== columns.length-1 ? 'green' : 'grey';
+          return columnIndex === columns.length - 1 ? 'green' : 'grey';
         },
-        
-        hLineWidth: (i,node) => (i===0 || i === node.table.widths.length ? 0: 1),
+
+        hLineWidth: (i, node) =>
+          i === 0 || i === node.table.widths.length ? 0 : 1,
         vLineWidth: () => 0,
-        
+
         hLineColor: function (i) {
           return i === 1 ? 'black' : '#aaa';
-        },    
-      },				
-      }  
+        },
+      },
+    };
   }
   //Função para exportação do pdf com seus dados vindo de uma api (no nosso caso é mocado no proproprio TS, mas não muda muito)
   ExportToPDF() {
     console.log(this.dataSource);
     let docDefinition = {
       content: [
-        { text: 'Tabela Periodica!', style: 'sectionHeader'},
-        
-        this.table(
-          this.dataSource, this.displayedColumns)
+        { text: 'Tabela Periodica!', style: 'sectionHeader' },
+
+        this.table(this.dataSource, this.displayedColumns),
       ],
-      styles:{
-        sectionHeader:{
+      styles: {
+        sectionHeader: {
           fontSize: 16,
-          color: 'blue'
+          color: 'blue',
         },
-        sectionBody:{
-        layout: 'noBorders'
-        }
-      }
+        sectionBody: {
+          layout: 'noBorders',
+        },
+      },
     };
     pdfMake.createPdf(docDefinition).open();
   }
@@ -166,13 +166,12 @@ export class AppComponent {
   //Função para exportação do PDF vindo diretamente do HTML
   public downloadAsPDF() {
     let doc = new jsPDF();
-   
-    const pdfTable = this.pdfTable.nativeElement;
-   
-    var html = htmlToPdfmake(pdfTable.innerHTML);
-     
-    const documentDefinition = { content: html };
-    pdfMake.createPdf(documentDefinition).open(); 
-  }
 
+    const pdfTable = this.pdfTable.nativeElement;
+
+    var html = htmlToPdfmake(pdfTable.innerHTML);
+
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).open();
+  }
 }
