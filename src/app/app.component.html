@@ -9,6 +9,7 @@
   <button (click)="downloadAsPDF()">ExportToPDF from HTML</button>
 
   <button (click)="exportHTMLToPDF()">Export HTML to PDF</button>
+  <button (click)="exportPDFMaker()">Export PDFMaker</button>
 </div>
 
 <div id="pdfTable" #pdfTable>
@@ -47,4 +48,6 @@
   </div>
 </div>
 
-<app-template id="pdfViewer"></app-template>
+<div id="pdfViewer" #pdfViewer>
+  <app-template></app-template>
+</div>

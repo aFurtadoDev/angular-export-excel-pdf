@@ -29,7 +29,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   name = 'Angular ' + VERSION.major;
@@ -181,7 +181,30 @@ export class AppComponent {
     const pdfViewer = this.pdfViewer.nativeElement;
     var html = htmlToPdfmake(pdfViewer.innerHTML);
     const documentDefinition = { content: html };
-    pdfMake.createPdf(documentDefinition).download(); 
-     
+    pdfMake.createPdf(documentDefinition).download();
+  }
+
+  exportPDFMaker() {
+    var docDefinition = {
+      content: [
+        // if you don't need styles, you can use a simple string to define a paragraph
+        'This is a standard paragraph, using default style',
+
+        // using a { text: '...' } object lets you set styling properties
+        { text: 'This paragraph will have a bigger font', fontSize: 15 },
+
+        // if you set the value of text to an array instead of a string, you'll be able
+        // to style any part individually
+        {
+          text: [
+            'This paragraph is defined as an array of elements to make it possible to ',
+            { text: 'restyle part of it and make it bigger ', fontSize: 15 },
+            'than the rest.',
+          ],
+        },
+      ],
+    };
+
+    pdfMake.createPdf(docDefinition).open('test.pdf');
   }
 }

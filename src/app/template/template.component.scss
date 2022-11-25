@@ -1,3 +1,10 @@
+
+$background-layout: #a80404;
+$primaryButtonColor: #18746e;
+$matDialogTitle: #7c5656; //#543232;
+$matIconColorTrash: $background-layout;
+$matIconColorPrimary: $primaryButtonColor;
+
 .mat-dialog-container {
   // min-width: 30vw;
   font-size: 12px !important;
