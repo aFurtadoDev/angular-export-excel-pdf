@@ -40,6 +40,8 @@ export class AppComponent {
   @ViewChild('TABLE', { static: false }) TABLE: ElementRef;
   @ViewChild('pdfTable') pdfTable: ElementRef;
 
+  @ViewChild('pdfViewer') pdfViewer!: ElementRef;
+
   ExportTOExcel() {
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(
       this.TABLE.nativeElement
@@ -173,5 +175,13 @@ export class AppComponent {
 
     const documentDefinition = { content: html };
     pdfMake.createPdf(documentDefinition).open();
+  }
+
+  public exportHTMLToPDF() {
+    const pdfViewer = this.pdfViewer.nativeElement;
+    var html = htmlToPdfmake(pdfViewer.innerHTML);
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).download(); 
+     
   }
 }
