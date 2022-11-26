@@ -108,9 +108,18 @@ export class AppComponent {
   }
 
   exportPDFMaker() {
+    let isWatermark = false;
+    let watermarkText = 'Cópia Controlada';
     var docDefinition = {
       pageSize: 'A4',
       pageMargins: [20, 45, 20, 45],
+      watermark: {
+        text: watermarkText,
+        color: 'blue',
+        opacity: isWatermark ? 0.2 : 0,
+        bold: true,
+        italics: false,
+      },
       content: [
         {
           image: 'logo',
