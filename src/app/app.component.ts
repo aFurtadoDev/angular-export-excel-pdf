@@ -187,12 +187,13 @@ export class AppComponent {
   exportPDFMaker() {
     var docDefinition = {
       pageSize: 'A4',
+      pageMargins: [20, 45, 20, 45],
       content: [
         {
           image: 'logo',
           width: 120,
           height: 40,
-          absolutePosition: { x: 400, y: 25 },
+          absolutePosition: { x: 400, y: 35 },
           alignment: 'right',
         },
         {
@@ -207,7 +208,7 @@ export class AppComponent {
               type: 'line',
               x1: 0,
               y1: 15,
-              x2: 595 - 2 * 40,
+              x2: 595 - 2 * 20,
               y2: 15,
               lineWidth: 0.5,
               color: '#ddd',
@@ -225,45 +226,36 @@ export class AppComponent {
                     widths: ['*', 'auto'],
                     headerRows: 0,
                     body: [
-                      // [{ text: 'Header 1', style: 'tableHeader' }, { text: 'Header 2', style: 'tableHeader' }, { text: 'Header 3', style: 'tableHeader' }],
                       [
-                        { text: 'Identificação:', fontSize: 10 },
+                        { text: 'Identificação:', style: 'lineHeader' },
                         {
                           text: 'Nome Identificador da Obra',
-                          fontSize: 10,
-                          alignment: 'right',
+                          style: 'lineBody',
                         },
                       ],
                       [
-                        { text: 'Cliente:', fontSize: 10 },
+                        { text: 'Cliente:', style: 'lineHeader' },
                         {
                           text: 'Nome do Cliente',
-                          fontSize: 10,
-                          alignment: 'right',
+                          style: 'lineBody',
                         },
                       ],
                       [
-                        { text: 'Proprietário', fontSize: 10 },
-                        {
-                          text: 'Nome do Proprietário',
-                          fontSize: 10,
-                          alignment: 'right',
-                        },
+                        { text: 'Proprietário', style: 'lineHeader' },
+                        { text: 'Nome do Proprietário', style: 'lineBody' },
                       ],
                       [
-                        { text: 'Finalidade:', fontSize: 10 },
+                        { text: 'Finalidade:', style: 'lineHeader' },
                         {
                           text: 'Nome da Finalidade',
-                          fontSize: 10,
-                          alignment: 'right',
+                          style: 'lineBody',
                         },
                       ],
                       [
-                        { text: 'Local:', fontSize: 10 },
+                        { text: 'Local:', style: 'lineHeader' },
                         {
                           text: 'Estado - UF',
-                          fontSize: 10,
-                          alignment: 'right',
+                          style: 'lineBody',
                         },
                       ],
                     ],
@@ -276,7 +268,9 @@ export class AppComponent {
                       return i === 0 || i === node.table.widths.length ? 0 : 0;
                     },
                     hLineColor: function (i, node) {
-                      return i === 0 || i === node.table.body.length ? '#ddd' : '#ddd';
+                      return i === 0 || i === node.table.body.length
+                        ? '#ddd'
+                        : '#ddd';
                     },
                     // vLineColor: function (i, node) {
                     //   return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
@@ -297,43 +291,38 @@ export class AppComponent {
                     body: [
                       // [{ text: 'Header 1', style: 'tableHeader' }, { text: 'Header 2', style: 'tableHeader' }, { text: 'Header 3', style: 'tableHeader' }],
                       [
-                        { text: 'Identificação:', fontSize: 10 },
+                        { text: 'Identificação:', style: 'lineHeader' },
                         {
                           text: 'Nome Identificador da Obra',
-                          fontSize: 10,
-                          alignment: 'right',
+                          style: 'lineBody',
                         },
                       ],
                       [
-                        { text: 'Cliente:', fontSize: 10 },
+                        { text: 'Cliente:', style: 'lineHeader' },
                         {
                           text: 'Nome do Cliente',
-                          fontSize: 10,
-                          alignment: 'right',
+                          style: 'lineBody',
                         },
                       ],
                       [
-                        { text: 'Proprietário', fontSize: 10 },
+                        { text: 'Proprietário', style: 'lineHeader' },
                         {
                           text: 'Nome do Proprietário',
-                          fontSize: 10,
-                          alignment: 'right',
+                          style: 'lineBody',
                         },
                       ],
                       [
-                        { text: 'Finalidade:', fontSize: 10 },
+                        { text: 'Finalidade:', style: 'lineHeader' },
                         {
                           text: 'Nome da Finalidade',
-                          fontSize: 10,
-                          alignment: 'right',
+                          style: 'lineBody',
                         },
                       ],
                       [
-                        { text: 'Local:', fontSize: 10 },
+                        { text: 'Local:', style: 'lineHeader' },
                         {
                           text: 'Estado - UF',
-                          fontSize: 10,
-                          alignment: 'right',
+                          style: 'lineBody',
                         },
                       ],
                     ],
@@ -346,12 +335,54 @@ export class AppComponent {
                       return i === 0 || i === node.table.widths.length ? 0 : 0;
                     },
                     hLineColor: function (i, node) {
-                      return i === 0 || i === node.table.body.length ? '#ddd' : '#ddd';
+                      return i === 0 || i === node.table.body.length
+                        ? '#ddd'
+                        : '#ddd';
                     },
                   },
                 },
               ],
-              
+            ],
+          },
+          layout: {
+            hLineWidth: function (i, node) {
+              return i === 0 || i === node.table.body.length ? 0 : 0.5;
+            },
+            vLineWidth: function (i, node) {
+              return i === 0 || i === node.table.widths.length ? 0 : 0;
+            },
+            hLineColor: function (i, node) {
+              return i === 0 || i === node.table.body.length ? '#ddd' : '#ddd';
+            },
+            // vLineColor: function (i, node) {
+            //   return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
+            // },
+            // hLineStyle: function (i, node) { return {dash: { length: 10, space: 4 }}; },
+            // vLineStyle: function (i, node) { return {dash: { length: 10, space: 4 }}; },
+            // paddingLeft: function(i, node) { return 4; },
+            // paddingRight: function(i, node) { return 4; },
+            // paddingTop: function(i, node) { return 2; },
+            // paddingBottom: function(i, node) { return 2; },
+            // fillColor: function (rowIndex, node, columnIndex) { return null; }
+          },
+        },
+        {
+          style: 'tableExample',
+          table: {
+            widths: ['100%'],
+            body: [
+              [
+                {
+                  text: '-- Observações --',
+                  style: 'tableTitle',
+                },
+              ],
+              [
+                {
+                  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                  style: 'tableText',
+                },
+              ],
             ],
           },
           layout: {
@@ -388,10 +419,31 @@ export class AppComponent {
           border: [true, true, true, true],
         },
         tableExample: {
-          margin: [15, 35, 15, 15],
+          margin: [10, 35, 10, 15],
+        },
+        lineHeader: {
+          fontSize: 10,
+          bold: true,
+          color: '#4e4e4e',
+        },
+        lineBody: {
+          fontSize: 10,
+          color: '#4e4e4e',
+          alignment: 'right',
+        },
+        tableTitle: {
+          fontSize: 10,
+          alignment: 'center',
+          color: '#3543e9',
+        },
+        tableText: {
+          margin: [0, 10, 0, 10],
+          fontSize: 10,
+          alignment: 'justify',
+          color: '#4e4e4e',
         },
       },
-    };    
+    };
 
     pdfMake.createPdf(docDefinition).open();
   }
